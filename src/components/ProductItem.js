@@ -44,7 +44,6 @@ const ProductItem = props => {
           // onClick={() => props.removeFromCart(cartKey)}
           >
             <span className="delete is-large"></span>
-            <span className="delete is-large"></span>
           </div>
         </div>
       </div>
