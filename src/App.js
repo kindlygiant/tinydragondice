@@ -69,6 +69,10 @@ export default class App extends Component {
     this.setState({ products }, () => callback && callback());
   };
 
+  deleteProduct = (product, callback) => {
+    axios.delete(API_URL.concat(`/products/${product.id}`));
+  }
+
   addToCart = (cartItem) => {
     let cart = this.state.cart;
     if (cart[cartItem.id]) {
@@ -127,7 +131,8 @@ export default class App extends Component {
           login: this.login,
           addProduct: this.addProduct,
           clearCart: this.clearCart,
-          checkout: this.checkout
+          checkout: this.checkout,
+          deleteProduct: this.deleteProduct
         }}
       >
         <Router ref={this.routerRef}>

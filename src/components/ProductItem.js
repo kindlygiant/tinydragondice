@@ -41,7 +41,7 @@ const ProductItem = props => {
             </div>
           </div>
           <div className="media-right"
-          // onClick={() => props.removeFromCart(cartKey)}
+           onClick={() => props.deleteProduct(product)}
           >
             <span className="delete is-large"></span>
           </div>
