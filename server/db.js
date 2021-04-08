@@ -13,11 +13,7 @@ const knex = require('knex')({
 knex.schema.hasTable('products')
     .then((exists) => {
       if (!exists) {
-        // If no "books" table exists
-        // create new, with "id", "author", "title",
-        // "pubDate" and "rating" columns
-        // and use "id" as a primary identification
-        // and increment "id" with every new record (book)
+        // If no "product" table exists, create one
         return knex.schema.createTable('products', (table)  => {
           table.increments('id').primary()
           table.string('name')

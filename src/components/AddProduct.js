@@ -11,6 +11,9 @@ const initState = {
   description: ""
 };
 
+
+const API_URL = "http://localhost:3001";
+
 class AddProduct extends Component {
   constructor(props) {
     super(props);
@@ -22,10 +25,10 @@ class AddProduct extends Component {
     const { name, price, qty, shortDesc, description } = this.state;
 
     if (name && price) {
-      const id = Math.random().toString(36).substring(2) + Date.now().toString(36);
+      const id = Math.floor(Math.random()*1000);
 
       await axios.post(
-        'http://localhost:3001/products/',
+        API_URL.concat('/products/'),
         { id, name, price, qty, shortDesc, description },
       )
 

@@ -27,7 +27,7 @@ const ProductItem = props => {
             )}
             <div className="is-clearfix">
               <button
-                className="button is-small is-outlined is-primary   is-pulled-right"
+                className="button is-small is-outlined is-primary is-pulled-right"
                 onClick={() =>
                   props.addToCart({
                     id: product.name,
@@ -39,6 +39,12 @@ const ProductItem = props => {
                 Add to Cart
               </button>
             </div>
+          </div>
+          <div className="media-right"
+          // onClick={() => props.removeFromCart(cartKey)}
+          >
+            <span className="delete is-large"></span>
+            <span className="delete is-large"></span>
           </div>
         </div>
       </div>
