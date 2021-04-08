@@ -51,6 +51,14 @@
       "stock": 4,
       "shortDesc": "They Dice",
       "description": "Cool dice. Cool person. Let's make this happen."
+    },
+    {
+      "id": "1",
+      "name": "Cool Dice",
+      "price": "35",
+      "qty": "4",
+      "shortDesc": "Description",
+      "longDesc": "Lorem ipsum dolor set"
     }
   ]
 }

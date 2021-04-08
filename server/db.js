@@ -21,7 +21,7 @@ knex.schema.hasTable('products')
         return knex.schema.createTable('products', (table)  => {
           table.increments('id').primary()
           table.string('name')
-          table.integer('cost')
+          table.integer('price')
           table.integer('qty')
           table.string('shortDesc')
           table.string('longDesc')

@@ -16,28 +16,48 @@ exports.getAllProducts = async (req, res) => {
   // Create new product
   exports.createProduct = async (req, res) => {
     knex('products').insert({
+        'id': req.body.id,
         'name': req.body.name,
-        'cost': req.body.cost,
+        'price': req.body.price,
         'qty': req.body.qty,
         'shortDesc': req.body.shortDesc,
         'longDesc': req.body.longDesc
       })
       .then(() => {
-        res.json({ message: `Product \'${req.body.title}\' created.` })
+        res.json({ message: `Product \'${req.body.name}\' created.` })
       })
       .catch(err => {
-        res.json({ message: `There was an error creating ${req.body.title}: ${err}` })
+        res.json({ message: `There was an error creating ${req.body.name}: ${err}` })
       })
   }
-  
+
+  // Update specific product
+  // pid : Product Id
+  exports.updateProduct = async (req, res) => {
+    knex('products').update({
+      'name': req.body.name,
+      'price': req.body.price,
+      'qty': req.body.qty,
+      'shortDesc': req.body.shortDesc,
+      'longDesc': req.body.longDesc
+    }).where('id', req.params.pid)
+    .then(() => {
+      res.json({ message: `Product pid:\'${req.params.pid}\' updated.` })
+    })
+    .catch(err => {
+      res.json({ message: `There was an error updating pid:\'${req.params.pid}\': ${err}` })
+    })
+  }
+
   // Remove specific product
+  // pid : Product Id
   exports.deleteProduct = async (req, res) => {
-    knex('products').where('id', req.body.id).del()
+    knex('products').where('id', req.params.pid).del()
       .then(() => {
-        res.json({ message: `Product ${req.body.id} deleted.` })
+        res.json({ message: `Product pid:\'${req.params.pid}\' deleted.` })
       })
       .catch(err => {
-        res.json({ message: `There was an error deleting ${req.body.id}: ${err}` })
+        res.json({ message: `There was an error deleting pid:\'${req.params.pid}\': ${err}` })
       })
   }
   

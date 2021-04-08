@@ -6,7 +6,7 @@ import axios from 'axios';
 const initState = {
   name: "",
   price: "",
-  stock: "",
+  qty: "",
   shortDesc: "",
   description: ""
 };
@@ -19,14 +19,14 @@ class AddProduct extends Component {
 
   save = async (e) => {
     e.preventDefault();
-    const { name, price, stock, shortDesc, description } = this.state;
+    const { name, price, qty, shortDesc, description } = this.state;
 
     if (name && price) {
       const id = Math.random().toString(36).substring(2) + Date.now().toString(36);
 
       await axios.post(
-        'http://localhost:3001/products',
-        { id, name, price, stock, shortDesc, description },
+        'http://localhost:3001/products/',
+        { id, name, price, qty, shortDesc, description },
       )
 
       this.props.context.addProduct(
@@ -35,7 +35,7 @@ class AddProduct extends Component {
           price,
           shortDesc,
           description,
-          stock: stock || 0
+          qty: qty || 0
         },
         () => this.setState(initState)
       );
@@ -53,7 +53,7 @@ class AddProduct extends Component {
   handleChange = e => this.setState({ [e.target.name]: e.target.value, error: "" });
 
   render() {
-    const { name, price, stock, shortDesc, description } = this.state;
+    const { name, price, qty, shortDesc, description } = this.state;
     const { user } = this.props.context;
 
     return !(user && user.accessLevel < 1) ? (
@@ -93,12 +93,12 @@ class AddProduct extends Component {
                 />
               </div>
               <div className="field">
-                <label className="label">Available in Stock: </label>
+                <label className="label">Available in qty: </label>
                 <input
                   className="input"
                   type="number"
-                  name="stock"
-                  value={stock}
+                  name="qty"
+                  value={qty}
                   onChange={this.handleChange}
                 />
               </div>
