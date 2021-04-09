@@ -42,11 +42,12 @@ export default class App extends Component {
       });
 
     if (res.status === 200) {
-      const { email } = jwt_decode(res.data.accessToken);
+      //const { email } = jwt_decode(res.data.accessToken);
+      const { email, password, isAdmin } = res.data;
       const user = {
         email,
-        token: res.data.accessToken,
-        accessLevel: email === "admin@example.com" ? 0 : 1,
+        password,
+        isAdmin
       };
 
       this.setState({ user });
@@ -62,6 +63,20 @@ export default class App extends Component {
     this.setState({ user: null });
     localStorage.removeItem("user");
   };
+
+  signup = async(email, password, isAdmin) => {
+    const res = await axios
+      .post(API_URL.concat("/signup"),{email, password, isAdmin})
+      .catch((res) => {
+        return { status: 401, message: "Unauthorized" };
+    });
+    if (res.status === 200) {
+      return true;
+    } else {
+      return false;
+    }
+    
+  }
 
   addProduct = (product, callback) => {
     let products = this.state.products.slice();
@@ -170,7 +185,7 @@ export default class App extends Component {
                 <Link to="/products" className="navbar-item">
                   Products
                 </Link>
-                {this.state.user && this.state.user.accessLevel < 1 && (
+                {this.state.user && this.state.user.isAdmin && (
                   <Link to="/add-product" className="navbar-item">
                     Add Product
                   </Link>

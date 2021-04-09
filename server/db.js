@@ -39,9 +39,38 @@ knex.schema.hasTable('products')
       console.error(`There was an error setting up the database: ${error}`)
     })
 
+knex.schema.hasTable('users')
+  .then((exists) => {
+    if(!exists) {
+      return knex.schema.createTable('users',(table) => {
+        table.increments('id').primary()
+        table.string('username')
+        table.string('password')
+        table.integer('supportTier')
+        table.boolean('isAdmin')
+      })
+      .then(() => {
+        console.log('Table \'Users\' created')
+      })
+      .catch((error) => {
+        console.error(`There was an error creating table: ${error}`)
+      })
+    }
+  })
+  .then(() => {
+    console.log('done')
+  })
+  .catch((error) => {
+    console.error(`There was an error setting up the database: ${error}`)
+  })
+
 // Just for debugging purposes:
-// Log all data in "books" table
+// Log all data in "products" table
 knex.select('*').from('products')
+  .then(data => console.log('data:', data))
+  .catch(err => console.log(err))
+
+  knex.select('*').from('users')
   .then(data => console.log('data:', data))
   .catch(err => console.log(err))
 

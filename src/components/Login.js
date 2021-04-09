@@ -63,10 +63,15 @@ class Login extends Component {
                 <div className="has-text-danger">{this.state.error}</div>
               )}
               <div className="field is-clearfix">
+              <button
+                  className="button is-outlined"
+                >
+                  Create User
+                </button>
                 <button
                   className="button is-primary is-outlined is-pulled-right"
                 >
-                  Submit
+                  Log In
                 </button>
               </div>
             </div>
